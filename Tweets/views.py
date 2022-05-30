@@ -5,7 +5,8 @@ from .models import *
 # Create your views here.
 
 def home_view(request, *args, **kwargs):
-    return HttpResponse("<h1> Hello Sohan </h1>")
+    # return HttpResponse("<h1> Hello Sohan </h1>")
+    return render(request, "Pages/home.html", context={}, status=200)
 
 def tweet_details_view(request, tweet_id, *args, **kwargs):
 

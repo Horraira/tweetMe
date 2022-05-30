@@ -11,3 +11,12 @@ src/*/package.lock
 Pipfile.lock
 node_modules
 package-lock.json
+
+### Django ###
+*.log
+*.pot
+__pycache__/
+local_settings.py
+
+.env
+db.sqlite3

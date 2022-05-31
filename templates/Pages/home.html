@@ -7,18 +7,34 @@ Home Page
 {%block content%}
 <h1>Hello, world!</h1>
 
+<div id='tweets'>
+</div>
+
 <script>
+const tweetElement = document.getElementById("tweets")
+
 const xhr  = new XMLHttpRequest()
 const method = 'GET'
 const url = "/tweets"
 const responseType = "json"
+
+function formatTweetElement(tweet) {
+    var formattedTweet = "<div class = 'mb-4' id = 'tweet-"+ tweet.id + "' ><p>" + tweet.content + "</p></div>";
+    return formattedTweet;
+}
 
 xhr.responseType = responseType
 xhr.open(method, url)
 xhr.onload = function(){
     const serverResponse = xhr.response
     var listedItems = serverResponse.response
-    console.log(listedItems)
+
+    var finalTweetStr = "";
+    listedItems.forEach((key, index)=>{
+        var currentItem = formatTweetElement(key);
+        finalTweetStr += currentItem;
+    })
+    tweetElement.innerHTML = finalTweetStr;
 }
 xhr.send()
 </script>

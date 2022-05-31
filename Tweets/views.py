@@ -5,8 +5,17 @@ from .models import *
 # Create your views here.
 
 def home_view(request, *args, **kwargs):
-    # return HttpResponse("<h1> Hello Sohan </h1>")
+
     return render(request, "Pages/home.html", context={}, status=200)
+
+def tweet_list_view(request, *args, **kwargs):
+    qs = Tweet.objects.all()
+    tweet_list = [{"id": x.id, "content":x.content} for x in qs]
+    data = {
+        "isUser": False,
+        "response": tweet_list
+    }
+    return JsonResponse(data)
 
 def tweet_details_view(request, tweet_id, *args, **kwargs):
 
@@ -27,4 +36,3 @@ def tweet_details_view(request, tweet_id, *args, **kwargs):
         status = 404
 
     return JsonResponse(data, status=status)
-    # return HttpResponse(f"<h1> Hello {tweet_id} - {obj.content} </h1>")
